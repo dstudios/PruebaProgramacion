@@ -1,0 +1,42 @@
+﻿@model List<TestCoppel.Core.Data.Models.Proveedor>
+
+<h2>Proveedores</h2>
+
+<p>@Html.ActionLink("Agregar Proveedor", "AddEditItem", "Proveedor", null, new { @class = "btn btn-primary" })</p>
+
+<table id="items-list" class="table table-hover">
+	<thead class="thead-inverse">
+		<tr>
+			<th>ProveedorID</th>
+			<th>RFC</th>
+			<th>Nombre</th>
+			<th>Estatus</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (!Model.Any())
+		{
+			<tr>
+				<td colspan="7">No hay proveedores para mostrar</td>
+			</tr>
+		}
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.ProveedorID</td>
+				<td>@item.RFC</td>
+				<td>@item.Nombre</td>
+				<td>@(item.Estatus ? "Activo" : "Inactivo")</td>
+				<td>
+					@using (Html.BeginForm("DeleteItem", "Proveedor"))
+					{
+						@Html.Hidden("id", item.ProveedorID)
+						<a class="btn btn-success" href="@Url.Action("AddEditItem","Proveedor", new { id=item.ProveedorID })" title="Editar"><span class="fa fa-pencil"></span></a>
+						<button type="submit" class="btn btn-danger" title="Eliminar"><span class="fa fa-trash-o"></span></button>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

@@ -1,0 +1,40 @@
+﻿@model TestCoppel.Web.Models.ComentariosViewModel
+
+<h2>Comentarios de @(Model.Usuario.Nombre + Model.Usuario.Apellido)</h2>
+
+<p>@Html.ActionLink("Agregar Comentario", "AddEditItem", "Comentario", new { usuarioId = Model.Usuario.UsuarioID }, new { @class = "btn btn-primary" })</p>
+
+<table id="items-list" class="table table-hover">
+	<thead class="thead-inverse">
+		<tr>
+			<th>ComentarioID</th>
+			<th>Descripcion</th>
+			<th>Estatus</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (!Model.Comentarios.Any())
+		{
+			<tr>
+				<td colspan="7">No hay comentarios para mostrar</td>
+			</tr>
+		}
+		@foreach (var item in Model.Comentarios)
+		{
+			<tr>
+				<td>@item.ComentarioID</td>
+				<td>@item.Descripcion</td>
+				<td>@(item.Estatus ? "Activo" : "Inactivo")</td>
+				<td>
+					@using (Html.BeginForm("DeleteItem", "Comentario"))
+					{
+						@Html.Hidden("id", item.ComentarioID)
+						<a class="btn btn-success" href="@Url.Action("AddEditItem","Comentario", new { usuarioId = Model.Usuario.UsuarioID, id=item.ComentarioID })" title="Editar"><span class="fa fa-pencil"></span></a>
+						<button type="submit" class="btn btn-danger" title="Eliminar"><span class="fa fa-trash-o"></span></button>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

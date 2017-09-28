@@ -1,0 +1,57 @@
+﻿@model TestCoppel.Core.Data.Models.Usuario
+
+<h2>Usuario</h2>
+
+@using (Html.BeginForm("SaveItem", "Usuario"))
+{
+	@Html.AntiForgeryToken()
+	@Html.HiddenFor(model => model.UsuarioID)
+
+	<div class="form-group row">
+		@Html.LabelFor(model => model.UsuarioID, htmlAttributes: new { @class = "col-form-label col-md-3" })
+		<div class="col-md-9">
+			@Html.DisplayFor(model => model.UsuarioID)
+		</div>
+	</div>
+	<div class="form-group row">
+		@Html.LabelFor(model => model.Clave, htmlAttributes: new { @class = "col-form-label col-md-3" })
+		<div class="col-md-9">
+			@Html.EditorFor(model => model.Clave, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.Clave, "", new { @class = "text-danger" })
+		</div>
+	</div>
+	<div class="form-group row">
+		@Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "col-form-label col-md-3" })
+		<div class="col-md-9">
+			@Html.EditorFor(model => model.Nombre, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.Nombre, "", new { @class = "text-danger" })
+		</div>
+	</div>
+	<div class="form-group row">
+		@Html.LabelFor(model => model.Apellido, htmlAttributes: new { @class = "col-form-label col-md-3" })
+		<div class="col-md-9">
+			@Html.EditorFor(model => model.Apellido, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.Apellido, "", new { @class = "text-danger" })
+		</div>
+	</div>
+	<div class="form-group row">
+		@Html.LabelFor(model => model.FechaNacimiento, htmlAttributes: new { @class = "col-form-label col-md-3" })
+		<div class="col-md-9">
+			@Html.EditorFor(model => model.FechaNacimiento, new { htmlAttributes = new { @class = "form-control" } })
+			@Html.ValidationMessageFor(model => model.FechaNacimiento, "", new { @class = "text-danger" })
+		</div>
+	</div>
+	<div class="form-group row justify-content-end">
+		<button type="submit" class="btn btn-success">Guardar</button>
+		@Html.ActionLink("Cancelar", "Index", "Usuario", null, new { @class = "btn btn-danger" })
+	</div>
+}
+
+@section scripts{
+	<script src="~/Scripts/TestCoppel/Usuario/create.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			TestCoppel.Usuario.create.init();
+		});
+	</script>
+}

@@ -1,0 +1,46 @@
+﻿@model List<TestCoppel.Core.Data.Models.Usuario>
+
+<h2>Usuarios</h2>
+
+<p>@Html.ActionLink("Agregar Usuario", "AddEditItem", "Usuario", null, new { @class = "btn btn-primary" })</p>
+
+<table id="items-list" class="table table-hover">
+	<thead class="thead-inverse">
+		<tr>
+			<th>UsuarioID</th>
+			<th>Clave</th>
+			<th>Nombre</th>
+			<th>Apellido</th>
+			<th>Fecha de Nacimiento</th>
+			<th>Estatus</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@if (!Model.Any()) {
+			<tr>
+				<td colspan="7">No hay usuarios para mostrar</td>
+			</tr>
+		}
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.UsuarioID</td>
+				<td>@item.Clave</td>
+				<td>@item.Nombre</td>
+				<td>@item.Apellido</td>
+				<td>@item.FechaNacimiento.ToShortDateString()</td>
+				<td>@(item.Estatus ? "Activo" : "Inactivo")</td>
+				<td>
+					@using (Html.BeginForm("DeleteItem", "Usuario"))
+					{
+						@Html.Hidden("id", item.UsuarioID)
+						<a class="btn btn-primary" href="@Url.Action("Index","Comentario", new { usuarioId=item.UsuarioID })" title="Administrar comentarios"><span class="fa fa-comment-o"></span></a>
+						<a class="btn btn-success" href="@Url.Action("AddEditItem","Usuario", new { id=item.UsuarioID })" title="Editar"><span class="fa fa-pencil"></span></a>
+						<button type="submit" class="btn btn-danger" title="Eliminar"><span class="fa fa-trash-o"></span></button>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

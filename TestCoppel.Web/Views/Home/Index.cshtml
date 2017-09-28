@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Prueba de Programación</h1>
+    <p class="lead">Carlos Camacho</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Usuarios</h2>
+        <p>
+            Administración del catálogo de usuarios y agregar comentarios específicos a un usuario
+        </p>
+        <p>@Html.ActionLink("Cargar","Index","Usuario",null,new { @class="btn btn-primary"})</p>
+    </div>
+	<div class="col-md-4">
+		<h2>Proveedores</h2>
+		<p>Administración del catálogo de proveedores y su relación con productos</p>
+		<p>@Html.ActionLink("Cargar", "Index", "Proveedor", null, new { @class = "btn btn-primary" })</p>
+	</div>
+	<div class="col-md-4">
+		<h2>Productos</h2>
+		<p>Administración del catálogo de productos y su relación con proveedore</p>
+		<p>@Html.ActionLink("Cargar", "Index", "Producto", null, new { @class = "btn btn-primary" })</p>
+	</div>
+</div>
